@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+  trip_wishlist_db:
+    image: mysql:8.0.28
+    volumes:
+      - "./.mysql-data/db:/var/lib/mysql"
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: trip_wishlist_db
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: mysql
+    networks:
+      - trip
+
+networks:
+  trip:
+    name: trip
