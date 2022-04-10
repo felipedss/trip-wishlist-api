@@ -2,8 +2,10 @@ package db
 
 import (
 	"database/sql"
+	"fmt"
 	"time"
 
+	"github.com/felipedss/trip-wishlist-api/infrastructure/env"
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -12,8 +14,11 @@ var (
 )
 
 func StartDB() {
-	//database, err := sql.Open("mysql", "mysql:mysql@tcp(content_db:3306)/trip_wishlist_db")
-	database, err := sql.Open("mysql", "mysql:mysql@tcp(localhost:3306)/trip_wishlist_db")
+
+	environment := env.GetEnvConfig().DBConfig
+
+	connectionString := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8", environment.User, environment.Password, environment.Host, environment.Database)
+	database, err := sql.Open(environment.Driver, connectionString)
 	if err != nil {
 		panic(err)
 	}

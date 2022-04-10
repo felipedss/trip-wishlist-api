@@ -20,7 +20,7 @@ func (a *WishlistRepositorySt) Insert(wishlist entity.Wishlist) error {
 		return err
 	}
 
-	_, errInsert := tx.Exec("INSERT INTO WISHLIST (DESTINATION) VALUES(?)", wishlist.Destination)
+	_, errInsert := tx.Exec("insert into wishlist (destination) values(?)", wishlist.Destination)
 	if errInsert != nil {
 		if err := tx.Rollback(); err != nil {
 			return err
