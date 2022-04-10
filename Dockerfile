@@ -14,4 +14,4 @@ COPY . .
 EXPOSE 8080
 
 # Start app
-CMD GO_ENVIRONMENT=test go run *.go
+CMD go run *.go

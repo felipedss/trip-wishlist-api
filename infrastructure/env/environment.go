@@ -19,8 +19,8 @@ var TestConfig = AppConfig{
 		Host:     "http://ec2-3-83-138-94.compute-1.amazonaws.com",
 		Port:     "8080",
 		Database: "trip_wishlist_db",
-		User:     "admin",
-		Password: "minhasenha",
+		User:     os.Getenv("MYSQL_USER"),
+		Password: os.Getenv("MYSQL_PASSWORD"),
 	},
 }
 
