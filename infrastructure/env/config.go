@@ -1,5 +1,7 @@
 package env
 
+import "os"
+
 type AppConfig struct {
 	DBConfig
 	ExternalClientConfig
@@ -16,4 +18,13 @@ type DBConfig struct {
 
 type ExternalClientConfig struct {
 	Url string
+}
+
+func GetEnvConfig() AppConfig {
+	environment := os.Getenv("GO_ENVIRONMENT")
+	config := DevConfig
+	if environment == "test" {
+		config = TestConfig
+	}
+	return config
 }
