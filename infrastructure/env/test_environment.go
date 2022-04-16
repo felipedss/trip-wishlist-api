@@ -12,6 +12,6 @@ var TestConfig = AppConfig{
 		Password: os.Getenv("MYSQL_PASSWORD"),
 	},
 	ExternalClientConfig: ExternalClientConfig{
-		Url: "https://test.api.amadeus.com/v2/shopping/flight-offers",
+		AmadeusUrl: "https://test.api.amadeus.com/v2/shopping/flight-offers",
 	},
 }

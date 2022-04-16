@@ -17,7 +17,7 @@ type DBConfig struct {
 }
 
 type ExternalClientConfig struct {
-	Url string
+	AmadeusUrl string
 }
 
 func GetEnvConfig() AppConfig {
