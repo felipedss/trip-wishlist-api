@@ -13,6 +13,10 @@ func ConfigRoutes(router *gin.Engine, run *runtime.Runtime) *gin.Engine {
 		{
 			wishlist.POST("/", run.WishlistController.Insert)
 		}
+		flightOffer := main.Group("flight-offer")
+		{
+			flightOffer.POST("/", run.FlightOfferController.GetAll)
+		}
 	}
 	return router
 }

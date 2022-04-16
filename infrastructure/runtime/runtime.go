@@ -7,7 +7,8 @@ import (
 )
 
 type Runtime struct {
-	WishlistController controller.WishlistController
+	WishlistController    controller.WishlistController
+	FlightOfferController controller.FlightOfferController
 }
 
 func InstanceRuntime() *Runtime {
@@ -17,6 +18,7 @@ func InstanceRuntime() *Runtime {
 	wishlistService := service.NewWishlistService(wishlistRepository)
 
 	return &Runtime{
-		WishlistController: controller.NewWishlistController(wishlistService),
+		WishlistController:    controller.NewWishlistController(wishlistService),
+		FlightOfferController: controller.NewWFlightOfferController(),
 	}
 }

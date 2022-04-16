@@ -11,6 +11,9 @@ var DevConfig = AppConfig{
 		User:     "mysql",
 		Password: "mysql",
 	},
+	ExternalClientConfig: ExternalClientConfig{
+		Url: "https://test.api.amadeus.com/v2/shopping/flight-offers",
+	},
 }
 
 var TestConfig = AppConfig{

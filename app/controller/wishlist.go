@@ -28,7 +28,7 @@ func (p *WishlistControllerSt) Insert(c *gin.Context) {
 	var createWishlistDTO dto.CreateWishlistDTO
 	err := c.ShouldBindJSON(&createWishlistDTO)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, apierror.BadRequestError("Error to bind json"))
+		c.JSON(http.StatusBadRequest, apierror.BadRequestErrorBindJson())
 		return
 	}
 

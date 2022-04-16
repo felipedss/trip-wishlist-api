@@ -2,6 +2,7 @@ package env
 
 type AppConfig struct {
 	DBConfig
+	ExternalClientConfig
 }
 
 type DBConfig struct {
@@ -11,4 +12,8 @@ type DBConfig struct {
 	Database string
 	User     string
 	Password string
+}
+
+type ExternalClientConfig struct {
+	Url string
 }
