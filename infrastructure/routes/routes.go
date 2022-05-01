@@ -15,7 +15,7 @@ func ConfigRoutes(router *gin.Engine, run *runtime.Runtime) *gin.Engine {
 		}
 		flightOffer := main.Group("flight-offer")
 		{
-			flightOffer.POST("/", run.FlightOfferController.GetAll)
+			flightOffer.GET("/", run.FlightOfferController.GetAll)
 		}
 	}
 	return router

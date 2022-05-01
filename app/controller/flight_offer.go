@@ -2,13 +2,12 @@ package controller
 
 import (
 	"encoding/json"
+	"net/http"
+
 	"github.com/felipedss/trip-wishlist-api/app/controller/apierror"
 	"github.com/felipedss/trip-wishlist-api/app/controller/dto"
-	"github.com/felipedss/trip-wishlist-api/app/controller/rest"
-	"github.com/felipedss/trip-wishlist-api/infrastructure/env"
+	"github.com/felipedss/trip-wishlist-api/domain/service"
 	"github.com/gin-gonic/gin"
-	"io/ioutil"
-	"net/http"
 )
 
 type FlightOfferController interface {
@@ -16,33 +15,18 @@ type FlightOfferController interface {
 }
 
 type FlightOfferControllerSt struct {
+	flightOfferService service.FlightOfferService
 }
 
-func NewWFlightOfferController() *WishlistControllerSt {
-	return &WishlistControllerSt{}
+func NewWFlightOfferController(flightOfferService service.FlightOfferService) *FlightOfferControllerSt {
+	return &FlightOfferControllerSt{
+		flightOfferService: flightOfferService,
+	}
 }
 
-func (p *WishlistControllerSt) GetAll(c *gin.Context) {
+func (p *FlightOfferControllerSt) GetAll(c *gin.Context) {
 
-	urlPath, err := rest.BuildQueryParam(env.GetEnvConfig().Url, c.Request.URL.Query())
-	if err != nil {
-		c.JSON(http.StatusBadRequest, apierror.BadRequestErrorQueryParms())
-		return
-	}
-
-	req, _ := http.NewRequest("GET", urlPath, nil)
-
-	req.Header.Add("accept", c.GetHeader("accept"))
-	req.Header.Add("Authorization", c.GetHeader("Authorization"))
-
-	res, err := http.DefaultClient.Do(req)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, apierror.BadRequestErrorCallRemote())
-		return
-	}
-
-	defer res.Body.Close()
-	body, _ := ioutil.ReadAll(res.Body)
+	body, err := p.flightOfferService.Get(c.Request.URL.Query(), c.GetHeader("accept"), c.GetHeader("Authorization"))
 
 	var response dto.FlightOfferResponse
 	err = json.Unmarshal(body, &response)
